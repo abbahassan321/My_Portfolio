@@ -72,7 +72,7 @@ const Projects = () => {
                     </span>
                   )}
 
-                  {project.links?.demo && project.links.demo !== "#" && (
+                  {project.links?.demo && project.links.demo !== "" && (
                     <a
                       href={project.links.demo}
                       target="_blank"
