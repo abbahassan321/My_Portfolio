@@ -1,5 +1,5 @@
-import React from 'react';
-import { portfolioData } from '@/data/portfolioData';
+import React from "react";
+import { portfolioData } from "@/data/portfolioData";
 
 const About = () => {
   const { about, hero } = portfolioData;
@@ -7,7 +7,6 @@ const About = () => {
   return (
     <section id="about" className="py-20 bg-gray-100 text-gray-800">
       <div className="max-w-6xl mx-auto px-4">
-
         <div className="mb-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             A Little About Me
@@ -15,21 +14,27 @@ const About = () => {
         </div>
 
         <div className="flex flex-col lg:flex-row gap-10 items-start">
-
           <div className="w-full lg:w-1/3 flex flex-col items-center">
-
             <div className="w-64 h-64 bg-blue-200 rounded-full mb-6 flex items-center justify-center overflow-hidden border-4 border-blue-600 shadow-xl">
-              <span className="text-sm text-gray-700">Your Professional Photo Here</span>
+              <img
+                src="/hassan2.jpg"
+                alt="Your Professional Photo"
+                className="w-330 h-320 object-cover"
+              />
             </div>
 
             <div className="w-full bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500">
-              <h4 className="text-xl font-bold text-gray-900 mb-4">Quick Facts</h4>
+              <h4 className="text-xl font-bold text-gray-900 mb-4">
+                Quick Facts
+              </h4>
 
               <ul className="space-y-3">
                 {about.funFacts.map((fact, index) => (
                   <li key={index} className="flex justify-between">
                     <span className="font-semibold">{fact.label}:</span>
-                    <span className="text-blue-600 font-medium">{fact.value}</span>
+                    <span className="text-blue-600 font-medium">
+                      {fact.value}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -54,15 +59,14 @@ const About = () => {
               ))}
             </div>
 
-            <a 
-              href={hero.resumeLink} 
+            <a
+              href={hero.resumeLink}
               download
               className="mt-8 inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition"
             >
               Download Full Resume
             </a>
           </div>
-
         </div>
       </div>
     </section>
