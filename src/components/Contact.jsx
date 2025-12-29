@@ -1,88 +1,64 @@
-import React from 'react';
-import { portfolioData } from '@/data/portfolioData';
+"use client";
+import React from "react";
+import { portfolioData } from "@/data/portfolioData";
+import { Mail, Github, Linkedin, Send } from "lucide-react";
 
-const SocialLink = ({ href, icon, name }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer"
-    className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 transition">
-    <span className="text-2xl">{icon}</span>
-    <span className="text-lg font-medium hidden md:inline">{name}</span>
-  </a>
-);
-
-const Contact = () => {
+export default function Contact() {
   const { hero } = portfolioData;
 
   return (
-    <section id="contact" className="py-20 bg-white text-gray-800">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="relative py-28 bg-slate-950 text-white">
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800" />
 
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Let's Build Something Together
+      <div className="relative z-10 max-w-4xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-extrabold mb-4">
+            Let’s <span className="text-cyan-400">Connect</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            I'm actively seeking Junior/Associate Full Stack roles and open to collaboration.
+          <p className="text-slate-400">
+            Open to junior / associate full-stack roles and collaborations.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-
-          <div className="bg-gray-50 p-8 rounded-xl shadow-inner border">
-            <h3 className="text-2xl font-bold mb-6">Connect with Me</h3>
-
-            <div className="space-y-6">
-              <SocialLink href={`mailto:${hero.email}`} icon="✉️" name={hero.email} />
-              <SocialLink href={hero.linkedin} icon="🔗" name="LinkedIn" />
-              <SocialLink href={hero.github} icon="🐙" name="GitHub" />
+        <div className="grid md:grid-cols-2 gap-10 bg-slate-900/60 border border-slate-800 rounded-2xl p-10">
+          {/* Info */}
+          <div>
+            <h3 className="font-bold mb-6">Contact Info</h3>
+            <div className="space-y-4 text-slate-300 text-sm">
+              <a href={`mailto:${hero.email}`} className="flex gap-3 hover:text-cyan-400">
+                <Mail size={18} /> {hero.email}
+              </a>
+              <a href={hero.linkedin} className="flex gap-3 hover:text-cyan-400">
+                <Linkedin size={18} /> LinkedIn
+              </a>
+              <a href={hero.github} className="flex gap-3 hover:text-cyan-400">
+                <Github size={18} /> GitHub
+              </a>
             </div>
           </div>
 
-          <div className="lg:col-span-2 bg-white p-8 rounded-xl shadow-2xl border-t-4 border-blue-600">
-
-            <h3 className="text-2xl font-bold mb-6">Send Me a Message</h3>
-
-            <form action="YOUR_FORM_ENDPOINT" method="POST" className="space-y-4">
-
-              <div>
-                <label className="block mb-1">Name</label>
-                <input 
-                  type="text" name="name" required
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-              </div>
-
-              <div>
-                <label className="block mb-1">Email</label>
-                <input 
-                  type="email" name="email" required
-                  className="w-full px-4 py-2 border rounded-lg"
-                />
-              </div>
-
-              <div>
-                <label className="block mb-1">Message</label>
-                <textarea 
-                  name="message" rows="4" required
-                  className="w-full px-4 py-2 border rounded-lg"
-                ></textarea>
-              </div>
-
-              <button type="submit"
-                className="w-full py-3 bg-blue-600 text-white rounded-lg">
-                Send Message
-              </button>
-
-            </form>
-          </div>
+          {/* Form */}
+          <form className="space-y-5">
+            <input
+              placeholder="Your name"
+              className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:border-cyan-400 outline-none"
+            />
+            <input
+              type="email"
+              placeholder="Your email"
+              className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:border-cyan-400 outline-none"
+            />
+            <textarea
+              rows="4"
+              placeholder="Your message"
+              className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:border-cyan-400 outline-none"
+            />
+            <button className="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-bold rounded-lg flex items-center justify-center gap-2">
+              Send Message <Send size={18} />
+            </button>
+          </form>
         </div>
-
-        <footer className="mt-16 text-center text-sm text-gray-500">
-          &copy; {new Date().getFullYear()} {hero.name}. Built with Next.js.
-        </footer>
-
       </div>
     </section>
   );
-};
-
-export default Contact;
+}

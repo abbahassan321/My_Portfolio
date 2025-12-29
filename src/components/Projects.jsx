@@ -1,96 +1,83 @@
+"use client";
 import React from "react";
-import { portfolioData } from "@/data/portfolioData";// ✅ FIXED IMPORT
+import { portfolioData } from "@/data/portfolioData";
+import { ExternalLink, Github, Lock } from "lucide-react";
 
-const Projects = () => {
-  const projects = portfolioData?.projects ?? []; // ✅ Prevent crash
+export default function Projects() {
+  const projects = portfolioData.projects || [];
 
   return (
-    <section id="projects" className="py-20 bg-gray-50 text-gray-800">
-      <div className="max-w-6xl mx-auto px-4">
-        
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Projects</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Currently engineering large-scale solutions for the Nigerian telecom and education sectors.
+    <section className="relative py-28 bg-slate-950 text-white">
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <div className="mb-16">
+          <h2 className="text-4xl font-extrabold mb-4">
+            Featured <span className="text-cyan-400">Projects</span>
+          </h2>
+          <p className="text-slate-400 max-w-2xl">
+            Production-ready systems across FinTech, EdTech, and Utility platforms.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <div
               key={project.id}
-              className="bg-white rounded-xl shadow-md hover:shadow-xl overflow-hidden border border-gray-100 flex flex-col"
+              className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 transition"
             >
-              <div className="p-6 pb-4">
-                <div className="flex justify-between">
-                  <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">
-                    {project.category}
+              <span className="text-xs font-bold text-cyan-400 uppercase">
+                {project.category}
+              </span>
+
+              <h3 className="text-xl font-bold mt-3 mb-3 hover:text-cyan-400 transition">
+                {project.title}
+              </h3>
+
+              <p className="text-slate-400 text-sm mb-4">
+                {project.description}
+              </p>
+
+              <div className="flex flex-wrap gap-2 mb-6">
+                {project.techStack?.slice(0, 4).map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-xs px-2 py-1 rounded bg-slate-800 text-slate-300"
+                  >
+                    {tech}
                   </span>
-
-                  {project.status === "In Progress" && (
-                    <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">
-                      🚧 In Development
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="text-xl font-bold mt-3">{project.title}</h3>
-                <p className="text-sm text-gray-600 mt-2">{project.description}</p>
+                ))}
               </div>
 
-              <div className="px-6 mb-auto">
-                <h4 className="text-xs font-bold text-gray-400 uppercase mb-2">Key Features</h4>
-                <ul className="list-disc list-inside text-sm text-gray-600 space-y-1">
-                  {project.features?.slice(0, 3).map((f, idx) => (
-                    <li key={idx}>{f}</li>
-                  ))}
-                </ul>
-              </div>
+              <div className="flex gap-4 text-sm">
+                {project.links?.code ? (
+                  <a
+                    href={project.links.code}
+                    target="_blank"
+                    className="flex items-center gap-2 text-slate-300 hover:text-white"
+                  >
+                    <Github size={16} /> Code
+                  </a>
+                ) : (
+                  <span className="flex items-center gap-2 text-slate-500">
+                    <Lock size={16} /> Private
+                  </span>
+                )}
 
-              <div className="p-6 border-t">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.techStack?.map((tech) => (
-                    <span key={tech} className="px-2 py-1 text-xs bg-gray-100 rounded-md">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex gap-3">
-                  {project.links?.code && project.links.code !== "#" ? (
-                    <a
-                      href={project.links.code}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex-1 text-center py-2 border rounded-lg text-sm"
-                    >
-                      View Code
-                    </a>
-                  ) : (
-                    <span className="flex-1 text-center py-2 border rounded-lg text-sm text-gray-400">
-                      Private Repo
-                    </span>
-                  )}
-
-                  {project.links?.demo && project.links.demo !== "" && (
-                    <a
-                      href={project.links.demo}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex-1 text-center py-2 bg-blue-600 text-white rounded-lg text-sm"
-                    >
-                      Live Demo
-                    </a>
-                  )}
-                </div>
+                {project.links?.demo && (
+                  <a
+                    href={project.links.demo}
+                    target="_blank"
+                    className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300"
+                  >
+                    <ExternalLink size={16} /> Live
+                  </a>
+                )}
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
-};
-
-export default Projects;
+}

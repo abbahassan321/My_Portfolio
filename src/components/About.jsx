@@ -1,76 +1,75 @@
+"use client";
 import React from "react";
 import { portfolioData } from "@/data/portfolioData";
+import { motion } from "framer-motion";
 
-const About = () => {
-  const { about, hero } = portfolioData;
+export default function About() {
+  const { about } = portfolioData;
 
   return (
-    <section id="about" className="py-20 bg-gray-100 text-gray-800">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            A Little About Me
-          </h2>
-        </div>
+    <section className="relative py-28 bg-slate-950 text-white overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800" />
+      <div className="absolute inset-0 opacity-[0.04] bg-[url('/noise.png')] pointer-events-none" />
 
-        <div className="flex flex-col lg:flex-row gap-10 items-start">
-          <div className="w-full lg:w-1/3 flex flex-col items-center">
-            <div className="w-64 h-64 bg-blue-200 rounded-full mb-6 flex items-center justify-center overflow-hidden border-4 border-blue-600 shadow-xl">
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid lg:grid-cols-2 gap-16 items-center"
+        >
+          {/* Image */}
+          <div className="relative">
+            <div className="aspect-square rounded-3x1 overflow-hidden border border-slate-800 shadow-3x1">
               <img
                 src="/hassan2.jpg"
-                alt="Your Professional Photo"
-                className="w-330 h-320 object-cover"
+                alt="Hassan Idris"
+                className="w-full h-full object-cover"
               />
             </div>
-
-            <div className="w-full bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500">
-              <h4 className="text-xl font-bold text-gray-900 mb-4">
-                Quick Facts
-              </h4>
-
-              <ul className="space-y-3">
-                {about.funFacts.map((fact, index) => (
-                  <li key={index} className="flex justify-between">
-                    <span className="font-semibold">{fact.label}:</span>
-                    <span className="text-blue-600 font-medium">
-                      {fact.value}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <div className="absolute -inset-6 bg-cyan-500/10 blur-3xl rounded-full -z-10" />
           </div>
 
-          <div className="w-full lg:w-2/3">
-            <p className="text-xl text-gray-700 leading-relaxed mb-8 border-l-4 border-blue-600 pl-4 italic">
-              "{about.summary}"
+          {/* Content */}
+          <div>
+            <h2 className="text-4xl font-extrabold mb-6">
+              About <span className="text-cyan-400">Me</span>
+            </h2>
+
+            <p className="text-slate-400 text-lg leading-relaxed mb-8">
+              {about.summary}
             </p>
 
-            <div className="space-y-6">
+            <div className="space-y-6 mb-10">
               {about.sections.map((section, index) => (
                 <div key={index}>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  <h3 className="text-lg font-bold text-white mb-2">
                     {section.title}
                   </h3>
-                  <p className="text-base text-gray-700 leading-relaxed">
-                    {section.content}
-                  </p>
+                  <p className="text-slate-400">{section.content}</p>
                 </div>
               ))}
             </div>
 
-            <a
-              href={hero.resumeLink}
-              download
-              className="mt-8 inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition"
-            >
-              Download Full Resume
-            </a>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {about.funFacts.map((fact, index) => (
+                <div
+                  key={index}
+                  className="p-4 rounded-xl bg-slate-900/60 border border-slate-800"
+                >
+                  <p className="text-xs uppercase tracking-wide text-slate-500">
+                    {fact.label}
+                  </p>
+                  <p className="text-xl font-bold text-cyan-400">
+                    {fact.value}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
-};
-
-export default About;
+}

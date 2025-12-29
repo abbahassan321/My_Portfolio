@@ -1,46 +1,67 @@
-import React from 'react';
-import { portfolioData } from '@/data/portfolioData';
+"use client";
+import React from "react";
+import { portfolioData } from "@/data/portfolioData";
+import { motion } from "framer-motion";
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 bg-white text-gray-800">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="relative py-28 bg-slate-950 text-white overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800" />
+      <div className="absolute inset-0 opacity-[0.04] bg-[url('/noise.png')] pointer-events-none" />
 
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            My Technical Toolkit
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        {/* Header */}
+        <div className="mb-16">
+          <h2 className="text-4xl font-extrabold mb-4">
+            Technical <span className="text-cyan-400">Stack</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            A versatile full-stack skill set ready for modern web development.
+          <p className="text-slate-400 max-w-2xl">
+            My expertise spans the full software development lifecycle, with
+            strong focus on Java Spring Boot, modern JavaScript frameworks,
+            and scalable backend systems.
           </p>
         </div>
 
+        {/* Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {portfolioData.skills.map((group) => (
-            <div 
-              key={group.category} 
-              className="bg-gray-50 p-6 rounded-xl shadow-lg border-t-4 border-blue-600 hover:shadow-xl transition"
+          {portfolioData.skills.map((group, index) => (
+            <motion.div
+              key={group.category}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="group bg-slate-900/60 border border-slate-800 rounded-2xl p-6 hover:border-cyan-400/40 hover:shadow-lg hover:shadow-cyan-500/5 transition-all"
             >
-              <div className="flex items-center mb-4">
-                <span className="text-3xl text-blue-600 mr-3">{group.icon}</span>
-                <h3 className="text-xl font-bold">{group.category}</h3>
+              {/* Icon */}
+              <div className="text-4xl mb-4 text-cyan-400/80 group-hover:text-cyan-400 transition">
+                {group.icon}
               </div>
 
-              <ul className="space-y-2">
-                {group.items.map((skill) => (
-                  <li key={skill} className="flex items-center text-base">
-                    <svg className="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/>
-                    </svg>
-                    {skill}
-                  </li>
-                ))}
-              </ul>
+              {/* Category */}
+              <h3 className="text-lg font-bold mb-4">
+                {group.category}
+              </h3>
 
-            </div>
+              {/* Skills */}
+              <div className="flex flex-wrap gap-2">
+                {group.items.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-3 py-1 text-xs font-medium rounded-md
+                               bg-slate-800 text-slate-300
+                               border border-slate-700
+                               group-hover:border-cyan-400/30
+                               transition"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
           ))}
         </div>
-
       </div>
     </section>
   );
